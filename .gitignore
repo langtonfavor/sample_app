@@ -40,8 +40,8 @@ yarn-debug.log*
 .yarn-integrity
 
 #ide
-/iml
-/idea
+*.iml
+.idea/
 
 # Ignore Spring files.
 /spring/*.pid
