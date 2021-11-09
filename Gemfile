@@ -26,6 +26,8 @@ gem 'bootstrap-sass'
 # gem 'image_processing', '~> 1.2'
 gem 'rails-controller-testing'
 
+gem 'bcrypt'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
