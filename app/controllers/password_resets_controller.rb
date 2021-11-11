@@ -21,7 +21,7 @@ class PasswordResetsController < ApplicationController
       @user.authenticated?(:reset, params[:id]))
       redirect_to root_url
     end
-    end
+  end
 
   def create
     @user = User.find_by(email: params[:password_reset][:email].downcase)
