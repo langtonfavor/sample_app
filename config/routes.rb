@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   patch 'edit' => 'static_pages#edit'
   resources :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :account_activations, only: [:edit]  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
