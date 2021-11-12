@@ -1,22 +1,33 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token
 
-  validates :password, presence: true, length: { minimum: 6 }
-  validates :name, presence: true, length: { maximum: 50 }
+  validates :password, presence: true, length: { minimum: 6 }, allow_nil: false
+  validates :name,  presence: true, length:  { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
             format: { with: VALID_EMAIL_REGEX },
             uniqueness: { case_sensitive: false }
+
+  has_secure_password
+  has_many :microposts
+  has_many :microposts, dependent: :destroy
+
+  before_save   :downcase_email
   before_save { self.email = email.downcase }
+
   attr_accessor :remember_token, :activation_token
   attr_accessor :remember_token, :activation_token, :reset_token
-  before_save   :downcase_email
-  has_secure_password
+
+  default_scope -> { order(created_at: :desc)}
 
   def activate
     update_attribute(:activated,    true)
     update_attribute(:activated_at, Time.zone.now)
   end
+
+  def feed
+    Micropost.where("user_id = ?", id)
+  end
+
 
   # Sends activation email.
   def send_activation_email
