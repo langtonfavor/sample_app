@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-  attr_accessor :remember_token
 
   validates :password, presence: true, length: { minimum: 6 }
   validates :name,  presence: true, length:  { maximum: 50 }
@@ -12,7 +11,6 @@ class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save   :downcase_email
   has_secure_password
-
   has_many :microposts
   has_many :microposts, dependent: :destroy
   has_many :active_relationships, class_name: "Relationship",
