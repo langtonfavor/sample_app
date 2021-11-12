@@ -1,11 +1,11 @@
 module SessionsHelper
 
   def logged_in_user
-  unless logged_in?
-    store_location
-    flash[:danger] = "Please log in."
-    redirect_to login_url
-  end
+    unless logged_in?
+      store_location
+      flash[:danger] = "Please log in."
+      redirect_to login_url
+    end
   end
 
   def current_user
@@ -26,7 +26,8 @@ module SessionsHelper
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
     end
-    end
+  end
+
   def logged_in?
     !current_user.nil?
   end
