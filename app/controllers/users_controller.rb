@@ -30,12 +30,11 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = "profile updated"
       redirect_to @user
     else
-      flash[:danger] = "deletion failed"
+      flash[:danger] = "update failed"
     end
   end
 
